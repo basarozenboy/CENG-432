@@ -1,26 +1,24 @@
+import jdk.nashorn.internal.ir.LiteralNode.ArrayLiteralNode.ArrayUnit
+
 /**
 * Created by basar.ozenboy on 08.11.2014.
 */
 
 class IyteMutableList
 {
-  var aMutableList : List[Int] = IyteMutableList.MutableList   // constructs an empty list!
+  var aMutableList : Array[Int] = IyteMutableList.MutableList
 
-  def add(x: Int): List[Int] =
+  def add(x: Int): Array[Int] =
   {
-    aMutableList = aMutableList :+ x
+    val tmpArr = Array(x)
+    aMutableList = Array.concat(aMutableList,tmpArr)
     return aMutableList
   }
 
-  def toStringL: String =
+  private def toStringL: String =
   {
-    var resultStr = "";
-    for (i <- (0 to aMutableList.length - 1)) {
-      resultStr = resultStr + aMutableList(i);
-      resultStr = resultStr + ",";
-    }
-    resultStr = resultStr.dropRight(1)
-    println(resultStr)
+    val resultStr = "";
+    println(aMutableList.mkString(","))
     return resultStr
   }
 
@@ -31,6 +29,6 @@ class IyteMutableList
 
 object IyteMutableList
 {
-  var MutableList : List[Int] = Nil   // constructs an empty list!
+  var MutableList = new Array[Int](0) // constructs an empty array!
 }
 

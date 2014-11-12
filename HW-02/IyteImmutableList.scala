@@ -4,23 +4,18 @@
 
 class IyteImmutableList
 {
-  var aImMutableList : List[Int] = IyteImmutableList.ImMutableList   // constructs an empty list!
+  var aImMutableList : Array[Int] = IyteImmutableList.ImMutableList   // constructs an empty list!
 
-  def add(x: Int): List[Int] =
+  def add(x: Int): Array[Int] =
   {
-    aImMutableList :+ x
-//    aImMutableList ::: List(x)
+    val tmpArr = Array(x)
+    return Array.concat(aImMutableList,tmpArr)
   }
 
-  def toStringL: String =
+  private def toStringL: String =
   {
-    var resultStr = "";
-    for (i <- (0 to aImMutableList.length - 1)) {
-      resultStr = resultStr + aImMutableList(i);
-      resultStr = resultStr + ",";
-    }
-    resultStr = resultStr.dropRight(1)
-    println(resultStr)
+    val resultStr = "";
+    println(aImMutableList.mkString(","))
     return resultStr
   }
 
@@ -31,5 +26,5 @@ class IyteImmutableList
 
 object IyteImmutableList
 {
-  var ImMutableList : List[Int] = Nil   // constructs an empty list!
+  var ImMutableList = new Array[Int](0)  // constructs an empty list!
 }
