@@ -1,12 +1,12 @@
-import jdk.nashorn.internal.ir.LiteralNode.ArrayLiteralNode.ArrayUnit
-
 /**
 * Created by basar.ozenboy on 08.11.2014.
 */
 
 class IyteMutableList
 {
-  var aMutableList : Array[Int] = IyteMutableList.MutableList
+//  var aMutableList : Array[Int] = IyteMutableList.MutableList
+
+  var aMutableList = new Array[Int](0)
 
   def add(x: Int): Array[Int] =
   {
@@ -29,6 +29,7 @@ class IyteMutableList
 
 object IyteMutableList
 {
-  var MutableList = new Array[Int](0) // constructs an empty array!
+//  var MutableList = new Array[Int](0) // constructs an empty array!
+  def apply() = new IyteMutableList()
 }
 
