@@ -8,10 +8,12 @@ class IyteImmutableList
 
   var aImMutableList = new Array[Int](0)
 
-  def add(x: Int): Array[Int] =
+  def add(x: Int):IyteImmutableList =
   {
     val tmpArr = Array(x)
-    return Array.concat(tmpArr,aImMutableList)
+    val tmpIyteImmutableList = new IyteImmutableList();
+    tmpIyteImmutableList.aImMutableList = (Array.concat(tmpArr,aImMutableList));
+    return tmpIyteImmutableList
   }
 
   private def toStringL: String =

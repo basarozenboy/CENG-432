@@ -8,11 +8,11 @@ class IyteMutableList
 
   var aMutableList = new Array[Int](0)
 
-  def add(x: Int): Array[Int] =
+  def add(x: Int): IyteMutableList =
   {
     val tmpArr = Array(x)
     aMutableList = Array.concat(aMutableList,tmpArr)
-    return aMutableList
+    return this
   }
 
   private def toStringL: String =
