@@ -2,8 +2,6 @@
  * Created by basar.ozenboy on 12.11.2014.
  */
 
-import util.control.Breaks._
-
 class IyteMutableSet
 {
   private var aMutableSet = new Array[Int](0)
@@ -15,9 +13,18 @@ class IyteMutableSet
     if  (contains(x) != true)
     {
       aMutableSet = addArrayWithOrder(aMutableSet,x)
-      aUnOrderedMutableSet = (Array.concat(aUnOrderedMutableSet,Array(x)));;
+      aUnOrderedMutableSet = addArrayAppend(aUnOrderedMutableSet,x);
     }
     return this
+  }
+
+  def addArrayAppend(aArray: Array[Int],IntX: Int): Array[Int] =
+  {
+    val newArr = new Array[Int](aArray.length + 1)
+    for (i <- 0 to (aArray.length - 1))
+      newArr(i) = aArray(i) // 1
+    newArr(aArray.length) = IntX
+    return newArr
   }
 
   def addArrayWithOrder(aArary: Array[Int],IntX: Int): Array[Int] =
@@ -36,7 +43,7 @@ class IyteMutableSet
     }
     else
     {
-      breakable {
+
         for (i <- 0 to (aArary.length - 1))
         {
           if (aArary(i) < IntX) {
@@ -55,7 +62,7 @@ class IyteMutableSet
               newArr(newArrItemIndex) = aArary(j);
               newArrItemIndex = newArrItemIndex + 1;
             }
-            break();
+            return newArr;
           }
           else
           if (aArary(i) == IntX) {
@@ -65,10 +72,10 @@ class IyteMutableSet
               newArr(newArrItemIndex) = aArary(j);
               newArrItemIndex = newArrItemIndex + 1;
             }
-            break();
+            return newArr;
           }
         }
-      }
+
     }
     aMutableSet = newArr
     return aMutableSet
@@ -79,20 +86,20 @@ class IyteMutableSet
     return searchElement(aMutableSet,x) > -1
   }
 
-  def searchElement(aArary: Array[Int], Element: Int): Int = {
-    var left = 0
-    var right = aArary.length-1
-    while (left<=right)
+  def searchElement(aArary: Array[Int], Element: Int): Int =
+  {
+    var LeftIndex = 0
+    var RightIndex = aArary.length-1
+    while (LeftIndex<=RightIndex)
     {
-      val mid = left + (right - left) / 2
-
-      if (aArary(mid) == Element)
-        return mid
+      val MiddleIndex = LeftIndex + (RightIndex - LeftIndex) / 2
+      if (aArary(MiddleIndex) == Element)
+        return MiddleIndex
       else
-      if (aArary(mid) > Element)
-        right = mid-1
+      if (aArary(MiddleIndex) > Element)
+        RightIndex = MiddleIndex-1
       else
-        left = mid+1
+        LeftIndex = MiddleIndex+1
     }
     return -1
   }
