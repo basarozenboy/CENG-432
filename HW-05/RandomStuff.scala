@@ -8,7 +8,7 @@ trait RandomStuffTrait {
   def executeWithRetry(retryCount: Int, op: => Int) : Option[Int]
 }
 
-class RandomStuff extends RandomStuffTrait {
+object RandomStuff extends RandomStuffTrait {
 
   case class RetryObj(var IntValue: Int, var BoolValue: Boolean)
 
