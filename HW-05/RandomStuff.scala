@@ -12,7 +12,7 @@ object RandomStuff extends RandomStuffTrait {
 
   case class RetryObj(var IntValue: Int, var BoolValue: Boolean)
 
-  override def transform(list: List[Int], op: (Int) => Int): List[Int] =
+  def transform(list: List[Int], op: (Int) => Int): List[Int] =
   {
     var newList: List[Int] = List()
     var tmpI: Int = 0
@@ -28,7 +28,7 @@ object RandomStuff extends RandomStuffTrait {
     xs:+ x
   }
 
-  override def executeWithRetry(retryCount: Int, op: => Int): Option[Int] =
+  def executeWithRetry(retryCount: Int, op: => Int): Option[Int] =
   {
     var tmpRetryObj = tryCatchOp(op)
     if (tmpRetryObj.BoolValue == true)
@@ -61,14 +61,21 @@ object RandomStuff extends RandomStuffTrait {
     }
   }
 
-  override def allValid(list: List[Int], op: (Int) => Boolean): Boolean =
+  def allValid(list: List[Int], op: (Int) => Boolean): Boolean =
   {
-    var tmpResult: Boolean = false
-    for(i <- 0 to list.length - 1) {
-      tmpResult = op(list(i))
-      if(tmpResult == false)
-        return false
+    var tmpResult: Boolean = true
+    try
+    {
+      for(i <- 0 to list.length - 1) {
+        tmpResult = op(list(i))
+        if(tmpResult == false)
+          return false
+      }
+      return tmpResult
     }
-    return tmpResult
+    catch
+    {
+      case e: Exception => return false
+    }
   }
 }
